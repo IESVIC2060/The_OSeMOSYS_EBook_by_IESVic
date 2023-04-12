@@ -1,2 +1,2 @@
-# The OSeMOSYS EBook by IESVic
+# The OSeMOSYS Ebook by IESVic
 This book contains detailed explanations on energy modelling and how to use Pyomo for developing an OSeMOSYS model. Additionaly, we hope this project will encourage other members of the energy sector, policy makers and the modelling community at large to opt for Pyomo when developing their models, as well as serve as a reference work for developping energy system models in the future.
