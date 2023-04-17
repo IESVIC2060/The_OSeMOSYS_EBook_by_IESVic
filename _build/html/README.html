@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The OSeMOSYS Ebook by IESVic &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+    <title>The Pyomo Implementation of OSeMOSYS for British Columbia &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
   
   
   
@@ -134,8 +134,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
-    <p class="title logo__title">OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -144,7 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    The OSeMOSYS Ebook by IESVic
+                    The Pyomo Implementation of OSeMOSYS for British Columbia
                 </a>
             </li>
         </ul>
@@ -176,7 +182,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_C.html">Appendix C: Model Development Timeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Book_Files/osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
 
 
 
@@ -367,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The OSeMOSYS Ebook by IESVic</h1>
+    <h1>The Pyomo Implementation of OSeMOSYS for British Columbia</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,10 +383,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pyomo-implementation-of-osemosys-for-british-columbia">The Pyomo Implementation of OSeMOSYS for British Columbia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-authors-and-book-information">Project authors and book information:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Pyomo Implementation of OSeMOSYS for British Columbia</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#project-authors-and-book-information">Project authors and book information:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-energy-modelling-and-osemosys"><span class="xref myst">1 - Introduction_to_Energy_Modelling_and_OSeMOSYS</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pyomo"><span class="xref myst">2 - Introduction to Pyomo</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-osemosys-model-in-pyomo"><span class="xref myst">3 - The OSeMOSYS Model in Pyomo</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-debugging"><span class="xref myst">4 - Model Debugging</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-considerations"><span class="xref myst">5 - Final Considerations</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-a-brief-insight-into-the-ampl-modeling-language"><span class="xref myst">Appendix A - A Brief Insight Into the AMPL Modeling Language</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-osemosys-storage-dynamics"><span class="xref myst">Appendix B - OSeMOSYS Storage Dynamics</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-c-model-development-timeline"><span class="xref myst">Appendix C - Model Development Timeline</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-d-overview-of-cplex-debugging"><span class="xref myst">Appendix D - Overview of CPLEX Debugging</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iesvic-osemosys-notebook-exercises-and-practice"><span class="xref myst">IESVic OSeMOSYS Notebook - Exercises and Practice</span></a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -391,16 +410,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="the-osemosys-ebook-by-iesvic">
-<h1>The OSeMOSYS Ebook by IESVic<a class="headerlink" href="#the-osemosys-ebook-by-iesvic" title="Permalink to this headline">#</a></h1>
-<p>This book contains detailed explanations on energy modelling and how to use Pyomo for developing an OSeMOSYS model. Additionaly, we hope this project will encourage other members of the energy sector, policy makers and the modelling community at large to opt for Pyomo when developing their models, as well as serve as a reference work for developping energy system models in the future.</p>
-<section id="the-pyomo-implementation-of-osemosys-for-british-columbia">
-<h2>The Pyomo Implementation of OSeMOSYS for British Columbia<a class="headerlink" href="#the-pyomo-implementation-of-osemosys-for-british-columbia" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-pyomo-implementation-of-osemosys-for-british-columbia">
+<h1>The Pyomo Implementation of OSeMOSYS for British Columbia<a class="headerlink" href="#the-pyomo-implementation-of-osemosys-for-british-columbia" title="Permalink to this headline">#</a></h1>
 <p>This project was developed by the University of Victoria’s <a class="reference external" href="https://www.uvic.ca/research/centres/iesvic/index.php">Institute for Integrated Energy Systems</a> and aims at developing an energy system model for the Canadian province of British Columbia. Particularly, this study seeks to understand the economic and technical feasibilities of decarbonizing the province’s building, transport and industrial sectors with electrification and power-to-gas transitions.</p>
 <p>This book contains the basics of the project’s development with detailed explanations on energy modelling and how to use <a class="reference external" href="https://www.pyomo.org/">Pyomo</a> for developing an <a class="reference external" href="http://www.osemosys.org/">OSeMOSYS</a> model that meets the goals of our project. Additionaly, we hope this project will encourage other members of the energy sector, policy makers and the modelling community at large to opt for Pyomo when developing their models, as well as serve as a reference work for developping energy system models in the future.</p>
 </section>
-<section id="project-authors-and-book-information">
-<h2>Project authors and book information:<a class="headerlink" href="#project-authors-and-book-information" title="Permalink to this headline">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="project-authors-and-book-information">
+<h1>Project authors and book information:<a class="headerlink" href="#project-authors-and-book-information" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Cristiano Curi Fernandes - Fourth year Electrical Engineering student at the <a class="reference external" href="https://www.uvic.ca/">University of Victoria</a> (<strong>book author</strong>)</p></li>
 <li><p>Henry Jiang - Fourth year Computer Science student at the <a class="reference external" href="https://www.uvic.ca/">University of Victoria</a></p></li>
@@ -410,48 +426,40 @@ document.write(`
 <li><p>Book version: V 2.0</p></li>
 </ul>
 </section>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html">1 Introduction to Energy Modelling and OSeMOSYS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html">2 Introduction to Pyomo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html#what-is-pyomo">2.1 What is Pyomo?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html#what-is-a-linear-program">2.2 What is a Linear Program?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html#motivation-why-choose-pyomo">2.3 Motivation: why choose Pyomo?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html#how-to-use-pyomo">2.4 How to use Pyomo?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html#references">2.5 References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html">3 The OSeMOSYS Model in Pyomo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html#motivation-why-model-the-energy-system-of-british-columbia">3.1 Motivation: why model the energy system of British Columbia?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html#basics-of-the-model-sets-parameters-variables-and-lp-formulation">3.2 Basics of the model: sets, parameters, variables and lp formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html#model-translation-from-gnu-mathprog-to-pyomo">3.3 Model translation from GNU MathProg to Pyomo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html#how-to-run-the-model">3.4 How to run the model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html#references">3.5 References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html">4 Model Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html#motivation-how-to-debug-linear-programs">4.1 Motivation: how to debug linear programs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html#tools-for-debugging">4.2 Tools for debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html#taking-advantage-of-solver-information">4.3 Taking advantage of solver information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html#interpreting-model-duals-for-debugging">4.4 Interpreting model duals for debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/4_Model_Debugging.html#references">4.5 References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/5_Final_Considerations.html">5 Final Considerations and Laying the Way Forward</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/5_Final_Considerations.html#conclusions">5.1 Conclusions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/5_Final_Considerations.html#recommendations">5.2 Recommendations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/5_Final_Considerations.html#further-studying-resources">5.3 Further studying resources</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_C.html">Appendix C: Model Development Timeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Book_Files/Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#introduction">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#important-information-for-exercises">Important Information for Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#initializations">Initializations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#solving-the-model">Solving the Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#visualizing-results">Visualizing Results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#exercise">Exercise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html#solve-the-model-again-with-altered-values">Solve the model again with altered values</a></li>
-</ul>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="table-of-contents">
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h1>
+<section id="introduction-to-energy-modelling-and-osemosys">
+<h2><a class="reference internal" href="Book_Files/1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html"><span class="doc std std-doc">1 - Introduction_to_Energy_Modelling_and_OSeMOSYS</span></a><a class="headerlink" href="#introduction-to-energy-modelling-and-osemosys" title="Permalink to this headline">#</a></h2>
 </section>
+<section id="introduction-to-pyomo">
+<h2><a class="reference internal" href="Book_Files/2_Introduction_to_Pyomo.html"><span class="doc std std-doc">2 - Introduction to Pyomo</span></a><a class="headerlink" href="#introduction-to-pyomo" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="the-osemosys-model-in-pyomo">
+<h2><a class="reference internal" href="Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.html"><span class="doc std std-doc">3 - The OSeMOSYS Model in Pyomo</span></a><a class="headerlink" href="#the-osemosys-model-in-pyomo" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="model-debugging">
+<h2><a class="reference internal" href="Book_Files/4_Model_Debugging.html"><span class="doc std std-doc">4 - Model Debugging</span></a><a class="headerlink" href="#model-debugging" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="final-considerations">
+<h2><a class="reference internal" href="Book_Files/5_Final_Considerations.html"><span class="doc std std-doc">5 - Final Considerations</span></a><a class="headerlink" href="#final-considerations" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="appendix-a-a-brief-insight-into-the-ampl-modeling-language">
+<h2><a class="reference internal" href="Book_Files/Appendix_A.html"><span class="doc std std-doc">Appendix A - A Brief Insight Into the AMPL Modeling Language</span></a><a class="headerlink" href="#appendix-a-a-brief-insight-into-the-ampl-modeling-language" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="appendix-b-osemosys-storage-dynamics">
+<h2><a class="reference internal" href="Book_Files/Appendix_B.html"><span class="doc std std-doc">Appendix B - OSeMOSYS Storage Dynamics</span></a><a class="headerlink" href="#appendix-b-osemosys-storage-dynamics" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="appendix-c-model-development-timeline">
+<h2><a class="reference internal" href="Book_Files/Appendix_C.html"><span class="doc std std-doc">Appendix C - Model Development Timeline</span></a><a class="headerlink" href="#appendix-c-model-development-timeline" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="appendix-d-overview-of-cplex-debugging">
+<h2><a class="reference internal" href="Book_Files/Appendix_D.html"><span class="doc std std-doc">Appendix D - Overview of CPLEX Debugging</span></a><a class="headerlink" href="#appendix-d-overview-of-cplex-debugging" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="iesvic-osemosys-notebook-exercises-and-practice">
+<h2><a class="reference internal" href="Book_Files/osemosys_notebook_version.html"><span class="doc std std-doc">IESVic OSeMOSYS Notebook - Exercises and Practice</span></a><a class="headerlink" href="#iesvic-osemosys-notebook-exercises-and-practice" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -459,7 +467,7 @@ document.write(`
         requestKernel: true,
         binderOptions: {
             repo: "IESVIC2060/The_OSeMOSYS_EBook_by_IESVic",
-            ref: "master",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
@@ -512,10 +520,23 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pyomo-implementation-of-osemosys-for-british-columbia">The Pyomo Implementation of OSeMOSYS for British Columbia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-authors-and-book-information">Project authors and book information:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Pyomo Implementation of OSeMOSYS for British Columbia</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#project-authors-and-book-information">Project authors and book information:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-energy-modelling-and-osemosys"><span class="xref myst">1 - Introduction_to_Energy_Modelling_and_OSeMOSYS</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pyomo"><span class="xref myst">2 - Introduction to Pyomo</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-osemosys-model-in-pyomo"><span class="xref myst">3 - The OSeMOSYS Model in Pyomo</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-debugging"><span class="xref myst">4 - Model Debugging</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-considerations"><span class="xref myst">5 - Final Considerations</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-a-brief-insight-into-the-ampl-modeling-language"><span class="xref myst">Appendix A - A Brief Insight Into the AMPL Modeling Language</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-osemosys-storage-dynamics"><span class="xref myst">Appendix B - OSeMOSYS Storage Dynamics</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-c-model-development-timeline"><span class="xref myst">Appendix C - Model Development Timeline</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-d-overview-of-cplex-debugging"><span class="xref myst">Appendix D - Overview of CPLEX Debugging</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iesvic-osemosys-notebook-exercises-and-practice"><span class="xref myst">IESVic OSeMOSYS Notebook - Exercises and Practice</span></a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

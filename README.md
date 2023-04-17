@@ -34,4 +34,4 @@ This book contains the basics of the project's development with detailed explana
 
 ## [Appendix D - Overview of CPLEX Debugging](Book_Files/Appendix_D.md)
 
-## [IESVic OSeMOSYS Notebook - Exercises and Practice](osemosys_notebook_version.ipynb)
+## [IESVic OSeMOSYS Notebook - Exercises and Practice](Book_Files/osemosys_notebook_version.ipynb)
