@@ -3,7 +3,7 @@
 
 title: OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic
 author: Cristiano Curi Fernandes
-logo: logo.png
+logo: Book_Files/logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -15,23 +15,26 @@ latex:
   latex_documents:
     targetname: IESVic2060_book.tex
 
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
-
 # Information about where the book exists on the web
 repository:
   url: https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic  # Online location of your book
   #path_to_book: docs  # Optional path to your book, relative to the repository root
   #branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: main
 
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 
 launch_buttons:
   notebook_interface: "classic"
   thebe: true
   colab_url: "https://colab.research.google.com"
+
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: off
