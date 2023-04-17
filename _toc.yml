@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: README.md
+chapters:
+- file: Book_Files/1_Introduction_to_Energy_Modelling_and_OSeMOSYS
+  #sections:
+  #- file: C1_Exercise_Notebook
+- file: Book_Files/2_Introduction_to_Pyomo
+- file: Book_Files/3_The_OSeMOSYS_Model_in_Pyomo
+- file: Book_Files/4_Model_Debugging
+- file: Book_Files/5_Final_Considerations
+- file: Book_Files/Appendix_A
+- file: Book_Files/Appendix_B
+- file: Book_Files/Appendix_C
+- file: Book_Files/Appendix_D
+- file: osemosys_notebook_version

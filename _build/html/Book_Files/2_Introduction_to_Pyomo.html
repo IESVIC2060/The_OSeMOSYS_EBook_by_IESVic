@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2 Introduction to Pyomo &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/2_Introduction_to_Pyomo';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3 The OSeMOSYS Model in Pyomo" href="3_The_OSeMOSYS_Model_in_Pyomo.html" />
+    <link rel="prev" title="1 Introduction to Energy Modelling and OSeMOSYS" href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    The OSeMOSYS Ebook by IESVic
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html">1 Introduction to Energy Modelling and OSeMOSYS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2 Introduction to Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3_The_OSeMOSYS_Model_in_Pyomo.html">3 The OSeMOSYS Model in Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_Model_Debugging.html">4 Model Debugging</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="5_Final_Considerations.html">5 Final Considerations and Laying the Way Forward</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_C.html">Appendix C: Model Development Timeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic/issues/new?title=Issue%20on%20page%20%2FBook_Files/2_Introduction_to_Pyomo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Book_Files/2_Introduction_to_Pyomo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2 Introduction to Pyomo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2 Introduction to Pyomo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pyomo">2.1 What is Pyomo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-linear-program">2.2 What is a Linear Program?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-choose-pyomo">2.3 Motivation: why choose Pyomo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pyomo">2.4 How to use Pyomo?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">2.4.1 Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-components">2.4.2 Modelling components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-examples-concrete-x-abstract">2.4.3 Modelling examples: concrete X abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-usage-inside-pyomo-models">2.4.4 Data usage inside Pyomo models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ampl-data-files-and-the-pyomo-command">2.4.4.1 AMPL data files and the <code class="docutils literal notranslate"><span class="pre">pyomo</span></code> command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pandas-for-data-manipulation">2.4.4.2 Using Pandas for data manipulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.5 References</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pyomo">
+<h1>2 Introduction to Pyomo<a class="headerlink" href="#introduction-to-pyomo" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-pyomo">
+<h1>2.1 What is Pyomo?<a class="headerlink" href="#what-is-pyomo" title="Permalink to this headline">#</a></h1>
+<p>Pyomo, or the Python Optimization Modelling Objects software, is an open-source package built for the Python scripting language. With Pyomo, the user can define abstract and concrete optimization problems to be solved by standard open-source and commercial solvers, such as Gurobi, IBM’s CPLEX and GLPK.</p>
+<p>Pyomo shares its capabilities with other algebraic modelling languages, such as AMPL, GAMS and AIMMS, while taking advantage of Python’s powerful libraries (Pandas, Numpy, Matplotlib, etc) and the language’s object-oriented nature. Together with the Coopr software library, Pyomo also integrates IBM’s COIN-OR open-source initiative for operations research software [1].</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-a-linear-program">
+<h1>2.2 What is a Linear Program?<a class="headerlink" href="#what-is-a-linear-program" title="Permalink to this headline">#</a></h1>
+<p>Linear programs are computer programs that employ optimization techniques to maximize, or to minimize a linear function. Typically, a linear optimization of an objective function is subject to one or more constraining functions. These constraints together bound the solution space of the problem, which is the graphical space that contains all feasible variable solutions to the problem</p>
+<p><img alt="Feasible Solution Space" src="https://eng.libretexts.org/&#64;api/deki/files/39652/Screenshot_(84).png?revision=1" /></p>
+<p>Linear programming theory is part of the operations research academic field and is extensively used in different industries and applications to solve different kinds of problems, such as profit maximization in businesses, shadow-price calculations in economics and the limit analysis of planar trusses in civil engineering [2]. In the case of this project, linear programming is extremely useful for finding the minimum cost of the implementation of renewable energy technologies in contrast with the currently available energy system in place in British Columbia.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="motivation-why-choose-pyomo">
+<h1>2.3 Motivation: why choose Pyomo?<a class="headerlink" href="#motivation-why-choose-pyomo" title="Permalink to this headline">#</a></h1>
+<p>The MathProg modelling language is simple and objective for writing linear programs, which typically consist of a few component declarations:</p>
+<ul class="simple">
+<li><p>Decision variables</p></li>
+<li><p>Target (objective) function</p></li>
+<li><p>Constraints</p></li>
+<li><p>Data (model parameters)</p></li>
+</ul>
+<p>The drawback for MathProg as a programming language, however, is its learning curve is attached directly to the understanding of linear optimization and the crude mathematics that describes linear problems in operations research. Pyomo allows us to achieve the same results from a linear problem by using a scripting language that does not require a deep understanding of operations research.</p>
+<p>Pyomo diverges from MathProg by keeping a language that likens spoken English, while still meeting the goals of any modelling language (separation of model declarations from model data and keeping a concise problem definition). By taking advantage of Python’s readily available and powerful libraries for mathematical operations [3], such as Numpy, Pandas, Matplotlib and many others, Pyomo may also host a complex workflow that is otherwise hard to construct using MathProg. Furthermore, the use o Python as a modelling language can encourage a larger community of engineers and researchers to engage with the model development process, as Pyomo is open-source and Python is ranked as StackOverflow’s <a class="reference external" href="https://learnworthy.net/stackoverflow-listed-the-most-commonly-used-programming-languages/">fourth most commonly used language</a> for data analysis.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-use-pyomo">
+<h1>2.4 How to use Pyomo?<a class="headerlink" href="#how-to-use-pyomo" title="Permalink to this headline">#</a></h1>
+<section id="installation">
+<h2>2.4.1 Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
+<p>In order to use Pyomo for modelling energy systems, one will need to install the following programs and libraries into their machine:</p>
+<ol class="arabic simple">
+<li><p>Anaconda Python: latest Python version should work for Pyomo models, but you can change the distribution version after installation. Download your individual toolkit <a class="reference external" href="https://www.anaconda.com/products/individual">here</a></p></li>
+<li><p>Create an Anaconda environment: after downloading Anaconda, open the Anaconda Prompt and create an environment to run your model.</p></li>
+</ol>
+<ul class="simple">
+<li><p>To create an environment run the following command: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">myenv</span> <span class="pre">python=3.6</span></code> (this will tell Anaconda to install <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">v3.6</span></code> into the environment)</p></li>
+<li><p>To install Python packages into your newly created environment, use the pip command: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pyomo</span></code> (this installs Pyomo into the environment) after you activate it</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>To run your newly created environment, use the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">myenv</span></code></p></li>
+<li><p>The Python installation comes with some basic preinstalled libraries, but you may also wish to install other packages, such as <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span></code>), or <a class="reference external" href="https://numpy.org/">Numpy</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span></code>)</p></li>
+<li><p>Install the solvers to solve the linear problems.</p></li>
+</ol>
+<ul class="simple">
+<li><p>To install GLPK on Windows, you can follow this <a class="reference external" href="http://www.osemosys.org/uploads/1/8/5/0/18504136/glpk_installation_guide_for_windows10_-_201702.pdf">tutorial</a> by OSeMOSYS creators at the KTH Royal Institute of Technology</p></li>
+<li><p>If you wish to install IBM’s CPLEX, you can follow their <a class="reference external" href="https://www.ibm.com/support/pages/downloading-ibm-ilog-cplex-optimization-studio-v1290">tutorial</a> installation</p></li>
+<li><p>Other commercial and open-source solvers are available as well, such as <a class="reference external" href="https://www.gurobi.com/gurobi-and-anaconda-for-windows/">Gurobi</a>, <a class="reference external" href="https://projects.coin-or.org/Cbc">CBC</a> and <a class="reference external" href="https://coin-or.github.io/Ipopt/index.html">IPOPT</a></p></li>
+</ul>
+</section>
+<section id="modelling-components">
+<h2>2.4.2 Modelling components<a class="headerlink" href="#modelling-components" title="Permalink to this headline">#</a></h2>
+<p>Pyomo models take advantage of Python’s object-oriented nature to assist the programmer when creating optimization models. Model objects are Python classes and as such contain many internal functions that can take arguments to construct the component [4]. The main components of any Pyomo model are:</p>
+<ul class="simple">
+<li><p>Parameters</p></li>
+<li><p>Sets</p></li>
+<li><p>Variables</p></li>
+<li><p>Objective functions</p></li>
+<li><p>Constraints</p></li>
+</ul>
+<p>The model components in Pyomo are supported by most Algebraic Modeling Languages (AMLs) [5], this way a Pyomo model can take in data from files in AML / AMPL data formats as input to construct the model instances. To illustrate the behavior of components inside a model, we can use a simple illustration: an optimization model is comprised of different equations, where at least one is the objective function and the remaining (non-objective functions) are constraints to our problem of study. Inside each equation we will have the decision variables, called Variables in the Pyomo script, each of which is accompanied by a corresponding term, called a Parameter inside Pyomo.</p>
+<p>In the example below, function f(x,y) is a two-dimensional multi-variable  equation with variables x and y and parameters  a, b and c. Each variable, in this case x and y are also indexed by indices i and j, respectively; inside the Pyomo model these indices would be called Sets.</p>
+<p><img alt="" src="https://github.com/IESVIC2060/Storage-Master/blob/Working_Branch/Wiki/Images/2-4%20Example%20Equation.jpg" /></p>
+</section>
+<section id="modelling-examples-concrete-x-abstract">
+<h2>2.4.3 Modelling examples: concrete X abstract<a class="headerlink" href="#modelling-examples-concrete-x-abstract" title="Permalink to this headline">#</a></h2>
+<p>As it was previously mentioned, optimization models in Pyomo are implemented as Python objects (classes), which will contain the model’s components inside them. A Pyomo model can either be Concrete, or Abstract and the main difference between these two implementations is the construction process of the model when the Python script is run.</p>
+<p>Pyomo Concrete Models are used to build models which receive input data to their Sets and Parameters as these components are declared, then Python will immediately create an instance of the model to be given to the solver. An Abstract Model, however, can assume a less strict form, where the engineer may declare model components without necessarily assigning their corresponding data values immediately, this way, the model can serve as a more generic version of the problem and can receive data from different sources after the model instance is created [5]. “<em>Abstract models include additional components for managing the declaration of model data, as well as logic for data initialization and validation</em>” [5].</p>
+<p>To illustrate the difference between the Concrete and Abstract model options in Pyomo, let us look into the same example problem being implemented using these two different model types. The problem in question is taken from <a class="reference external" href="https://books.google.com.br/books/about/Operations_Research_Models_and_Methods.html?id=8uEeAQAAIAAJ&amp;redir_esc=y">Operations Research: Models and Methods by Jensen &amp; Bard</a> and has been <a class="reference external" href="https://github.com/brentertainer/pyomo-tutorials/blob/master/introduction/02-lp-pyomo.ipynb">implemented as a Pyomo Concrete Model</a> by professor Brent Austgen of the University of Texas Austin as part of a workshop on optimization tools in Python. You can watch his <a class="reference external" href="https://www.youtube.com/watch?v=pxCogCylmKs">full lecture</a> for a deeper dive into Pyomo and optimization tools. The <a class="reference external" href="https://github.com/criscfer/IESVic-Pyomo-Test/blob/main/Pyomo%20and%20Pandas%20Example%20Model/Pyomo_LP_Example.ipynb">Abstract Model implementation</a> of the problem has been carried out by Cristiano Fernandes of IESVic and is available inside this GitHub repository.</p>
+<p>The main difference between Concrete and Abstract models that is noticible between the given examples is what is called <a class="reference external" href="https://pyomo.readthedocs.io/en/stable/working_abstractmodels/instantiating_models.html">model instantiation</a>, which is the procedure of creating a model instance that is passed to the solver in order to get a solution. An instance of a model component is the creation of that component in memory by Pyomo and its initialization to the appropriate value; this process occurs in unique ways between Concrete and Abstract models.</p>
+<p>Concrete model components are created and initialized as they are added to the model object, but Abstract model components are treated as “empty boxes” by Pyomo until an instance of the problem is created by the user, that is, in Abstract models, equations and components take prescedence over data, allowing the programmer to test the model for different datasets without the need for multiple model instances to be created. To create an Abstractmodel instance, we can simply use the <code class="docutils literal notranslate"><span class="pre">create_instance()</span></code> method from Pyomo and <strong>pass the instance of the model to the solver</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">instance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_instance</span><span class="p">()</span> <span class="c1"># create the abstract model instance</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;glpk&#39;</span><span class="p">)</span> <span class="c1"># choose solver to be used</span>
+<span class="n">final_result</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># pass instance to solver and display results on screen</span>
+</pre></div>
+</div>
+</section>
+<section id="data-usage-inside-pyomo-models">
+<h2>2.4.4 Data usage inside Pyomo models<a class="headerlink" href="#data-usage-inside-pyomo-models" title="Permalink to this headline">#</a></h2>
+<section id="ampl-data-files-and-the-pyomo-command">
+<h3>2.4.4.1 AMPL data files and the <code class="docutils literal notranslate"><span class="pre">pyomo</span></code> command<a class="headerlink" href="#ampl-data-files-and-the-pyomo-command" title="Permalink to this headline">#</a></h3>
+<p>As shown by the Abstract Model example, a Pyomo abstract model can accept data input from sources other than the script itself, which allows for a model design and development that is independent of having available data for testing. This data can be imported into the model through data commands in a data file, or through ModelData objects and even by using data manipulation libraries, such as Pandas for extracting information from spreadsheets.</p>
+<p>Pyomo’s data command files closely resemble AMPL’s data commands, but are not identical to one another. The main commands in a data file are <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter</span></code> and <code class="docutils literal notranslate"><span class="pre">import</span></code>, when data is not present in the data file, but rather contained in a separate CSV, or other types of files. Additionally, Pyomo provides the <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> commands, which do not serve a major role inside the data file, but allow for compatibility between Pyomo data files and AMPL scripts that define data commands.</p>
+<p>More about using data files is available in chapter 6 of the Pyomo Optimization textbook [5]. An example of a typical Pyomo data file is found <a class="reference external" href="https://github.com/criscfer/OSeMOSYS_Pyomo/blob/master/UTOPIA_2015_08_27.dat">here</a>. It is also interesting to note that AMPL-like data files are also sometimes used by MathProg models, although with some minor syntax differences to the data files used by Pyomo models, meaning one could safely translate data files from a MathProg model to be used by a Pyomo model.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyomo</span></code> command is used to run the model from the command line and is able to accpet data files, then read their information and pass to the solver to apply to the model. Here is an example to illustrate its use: <code class="docutils literal notranslate"><span class="pre">pyomo</span> <span class="pre">solve</span> <span class="pre">--solver=glpk</span> <span class="pre">my_model.py</span> <span class="pre">my_data.dat</span> <span class="pre">--summary</span></code>. In this example, the following steps will take place after the command is executed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pyomo</span> <span class="pre">solve</span></code>: evoke pyomo from the command line and inform of a problem to be solved</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--solver=glpk</span></code>: pass the problem information to the chosen solver (model definitions and model data)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">my_model.py</span></code>: give the Pyomo model file with model definitions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">my_data.dat</span></code>: give the Pyomo data file with model data information</p></li>
+</ul>
+</section>
+<section id="using-pandas-for-data-manipulation">
+<h3>2.4.4.2 Using Pandas for data manipulation<a class="headerlink" href="#using-pandas-for-data-manipulation" title="Permalink to this headline">#</a></h3>
+<p>One of the ways to initialize model parameters and sets in Pyomo is through the data processing library, Pandas. Pandas’ <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/dsintro.html#dataframe">data frames</a> allow us to retrieve data from spreadsheets and treat them as a SQL table, or a Python dictionary. The correct manipulation of these data frames can facilitate the initialization process by parsing individual parts of a large spreadsheet one step at a time.</p>
+<p>In our OSeMOSYS model, Pandas was employed to allow us to bypass data imports through other means, such as the ModelData functionality of Pyomo and to allow the model to run entirely from the IDE. Our function for data processing is shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Process_Data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s2">&quot;set&quot;</span><span class="p">):</span> <span class="c1"># Where data is a Pandas Data Frame</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span> <span class="c1"># Transform dataframe into dictionary of lists</span>
+    <span class="c1">#print(data)</span>
+    <span class="n">included</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;Included&#39;</span><span class="p">)</span> <span class="c1"># Get the &#39;Included&#39; column as a separate list (alternative way of achieving this: list(data.values())[0] )</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Get parameter values as a separate list</span>
+    <span class="k">if</span> <span class="n">component</span> <span class="o">==</span> <span class="s2">&quot;set&quot;</span><span class="p">:</span> <span class="c1"># Initialize sets</span>
+        <span class="n">initializer</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">included</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Yes&quot;</span><span class="p">:</span>
+                <span class="n">initializer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">component</span> <span class="o">==</span> <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="c1"># Initialize parameters</span>
+        <span class="n">initializer</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">sets</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">set_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sets</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span> <span class="c1"># Get sets indexing the parameter as tuples</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">included</span><span class="p">,</span> <span class="n">set_tuples</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;No&#39;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                <span class="n">initializer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+    <span class="k">return</span> <span class="n">initializer</span>
+</pre></div>
+</div>
+<p>It is important to note that our data parsing function is <strong>application specific</strong>, that is, it serves the purpose of parsing the data in the format we are feeding into the model. If you have data provided from an outside source, then the data frames need to be carefully constructed to fit in the appropriate sets and parameters for your model.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>2.5 References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h1>
+<p>[1] <a class="reference external" href="https://link.springer.com/article/10.1007/s12532-011-0026-8">Pyomo: modeling and solving mathematical programs in Python</a></p>
+<p>[2] <a class="reference external" href="https://mathworld.wolfram.com/LinearProgramming.html">Linear Programming - Wolfram Math World</a></p>
+<p>[3] <a class="reference external" href="https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/System_Design_for_Uncertainty_(Hover_and_Triantafyllou)/07%3A_Optimization/7.04%3A_Linear_Programming">Hover F. S., M.S. Triantafyllou; System Design for Uncertainty; 7.4: Linear Programming</a></p>
+<p>[4] <a class="reference external" href="https://www.osti.gov/biblio/1525944-pyomo-workshop-summer">Pyomo Workshop: 2018</a></p>
+<p>[5] <a class="reference external" href="https://link.springer.com/book/10.1007/978-3-030-68928-5">Pyomo-Optimization Modelling in Python</a></p>
+<p>[6] <a class="reference external" href="https://ampl.com/resources/the-ampl-book/chapter-downloads/">AMPL</a></p>
+<p>[7] <a class="reference external" href="https://pyomo.readthedocs.io/en/stable/">Pyomo - Documentation</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "IESVIC2060/The_OSeMOSYS_EBook_by_IESVic",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Book_Files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1 Introduction to Energy Modelling and OSeMOSYS</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_The_OSeMOSYS_Model_in_Pyomo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3 The OSeMOSYS Model in Pyomo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2 Introduction to Pyomo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pyomo">2.1 What is Pyomo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-linear-program">2.2 What is a Linear Program?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-choose-pyomo">2.3 Motivation: why choose Pyomo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pyomo">2.4 How to use Pyomo?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">2.4.1 Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-components">2.4.2 Modelling components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-examples-concrete-x-abstract">2.4.3 Modelling examples: concrete X abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-usage-inside-pyomo-models">2.4.4 Data usage inside Pyomo models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ampl-data-files-and-the-pyomo-command">2.4.4.1 AMPL data files and the <code class="docutils literal notranslate"><span class="pre">pyomo</span></code> command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pandas-for-data-manipulation">2.4.4.2 Using Pandas for data manipulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.5 References</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Cristiano Curi Fernandes
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

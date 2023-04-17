@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Appendix D: Overview of CPLEX Debugging &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/Appendix_D';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IESVic OSeMOSYS Notebook" href="../osemosys_notebook_version.html" />
+    <link rel="prev" title="Appendix C: Model Development Timeline" href="Appendix_C.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    The OSeMOSYS Ebook by IESVic
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html">1 Introduction to Energy Modelling and OSeMOSYS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Introduction_to_Pyomo.html">2 Introduction to Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3_The_OSeMOSYS_Model_in_Pyomo.html">3 The OSeMOSYS Model in Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_Model_Debugging.html">4 Model Debugging</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="5_Final_Considerations.html">5 Final Considerations and Laying the Way Forward</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_C.html">Appendix C: Model Development Timeline</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Appendix D: Overview of CPLEX Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic/issues/new?title=Issue%20on%20page%20%2FBook_Files/Appendix_D.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Book_Files/Appendix_D.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Appendix D: Overview of CPLEX Debugging</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-1-model-feasibility-infeasibility">D.1 Model Feasibility / Infeasibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-2-conflicts-and-the-conflict-refiner">D.2 Conflicts and the Conflict Refiner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-3-references">D.3 References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="appendix-d-overview-of-cplex-debugging">
+<h1>Appendix D: Overview of CPLEX Debugging<a class="headerlink" href="#appendix-d-overview-of-cplex-debugging" title="Permalink to this headline">#</a></h1>
+<p>The debugging process is at the core of of any mathematical program model. In this project, we used the CPLEX solver as the main optimizer for the model. In chapter 4, we briefly introduced the use of the CPLEX optimization suite to probe your model’s solution; now, we will explore some of the nuances of the solver to better guide your debugging process.</p>
+<p>CPLEX is a robust linear optimizer for your machine, and as such, it has many applications and tools to help the user debug and increase the performance of their model. In this appendix we will be exploring the conflict refiner and some of the nuances of model infeasibility, but if you wish to dive deeper into CPLEX and better understand the software as a whole, then check their <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex-users-manual">user manual</a>.</p>
+<p>The following flowchart summarizes the contents of this appendix and serves as a guide for model debugging in CPLEX.</p>
+<p><img alt="" src="../_images/CPLEX_Debug_Flowchart.png" /></p>
+<section id="d-1-model-feasibility-infeasibility">
+<h2>D.1 Model Feasibility / Infeasibility<a class="headerlink" href="#d-1-model-feasibility-infeasibility" title="Permalink to this headline">#</a></h2>
+<p>The most common case in which one would want to use the CPLEX optimizer IDE is to debug a model and trace the origin of an infeasibility. While there are many reasons for model infeasibilities, the CPLEX solver allows the user to dissect a model from its <code class="docutils literal notranslate"><span class="pre">lp</span></code> file, therefore, as it was explained in chapter 4, the debugging process for any model begins with reading its <code class="docutils literal notranslate"><span class="pre">.lp</span></code> file, which pyomo can write upon request (read chapter 4 for further details).</p>
+<p>After reading the <code class="docutils literal notranslate"><span class="pre">.lp</span></code> file, it is common practice to solve the model again inside the CPLEX IDE using the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> command. If the model is infeasible, CPLEX will trace the cause of the infeasibility, usually, to either a <strong>row</strong>, or a <strong>column</strong>, which denotes a problem with a given constraint, or variable, respectively. Sometimes, just knowing if the problem resides with a variable, or a constraint can mean an easy fix to the constraint declaration, or a slight change to the input parameters can get rid of the infeasibility. Other times it can be quite hard to know which portion of input data is causing the problem, or how exactly to alter the solution space to accomodate the infeasibility.</p>
+<p>To deal with more convoluted infeasibilities, it is recommended that the user calls the <code class="docutils literal notranslate"><span class="pre">feasopt</span></code> command from the CPLEX IDE. This command will allow the solver to perform boundary relaxations, which will give an output suggesting the least change (minimum variation) to the objective that would achieve feasibility. “FeasOpt does not actually modify your model. Instead, it suggests a set of bounds and constraint ranges and produces the solution that would result from these relaxations [1].”</p>
+<p>The output from the command will give a relaxation amount that is to be applied to the infeasible variable, or constraint. This amount (vector) will be positive or negative depending upon the kind of constraint or variable bound which is infeasible, or it will be 0 (zero) if the model is already feasible [2].</p>
+<ul class="simple">
+<li><p>Less-than-or-equal-to constraint / variable upper bound: positive vector (add amount to constraint / variable)</p></li>
+<li><p>Greather-than-or-equal-to constraint / variable lower bound: negative vector (subtract amount from constraint / variable)</p></li>
+<li><p>Equal-to constraint: in this case the feasibility vector will be dependent on what inequality causes the infeasibility:</p>
+<ol class="arabic simple">
+<li><p>The constraint’s RHS &gt; LHS: vector is negative (subtract amount from constraint)</p></li>
+<li><p>The constraint’s RHS &lt; LHS: vector is positive (add amount to constraint)</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="d-2-conflicts-and-the-conflict-refiner">
+<h2>D.2 Conflicts and the Conflict Refiner<a class="headerlink" href="#d-2-conflicts-and-the-conflict-refiner" title="Permalink to this headline">#</a></h2>
+<p>Sometimes, a model can become infeasible due to a wrong declaration of a constraint, or because input data is drastically skewing constraints and re-shaping the solution space, such that its boundaries are conflicting with each other. A conflict is simply a set of mutually contradicting constraints and / or variable bounds in a model [3].</p>
+<p>Luckly, CPLEX provides its user with a <strong>conflict refiner</strong> tool which can bring light to the conflict set. To invoke the conflict refiner from within the IDE in the command line, the user must navigate to the <code class="docutils literal notranslate"><span class="pre">tools</span></code> menu, which can be done with the following command: <code class="docutils literal notranslate"><span class="pre">tools</span> <span class="pre">conflict</span></code>. This will output the conflict set (number of conflicting constraints and variable bounds). If you wish to have the entire conflict set printed out onto the screen, you can do so with the <code class="docutils literal notranslate"><span class="pre">display</span></code> command as follows: <code class="docutils literal notranslate"><span class="pre">display</span> <span class="pre">conflict</span> <span class="pre">all</span></code>. Or, you may have the set printed out to a separate file by writting a conflict file: <code class="docutils literal notranslate"><span class="pre">write</span> <span class="pre">my_confliict_file</span> <span class="pre">clp</span></code>.</p>
+<p>The conflict refiner must first be called to analyze the model for possible conflucts before the conflict set can be displayed, that is, if you first try to write the conflict set, before calling thr conflict refiner, CPLEX will simply say your model has no conflicts when it may, in fact, contain some. In summary, the commands related to the conflict refiner are listed below.</p>
+<ol class="arabic simple">
+<li><p>Invoke conflict refiner: <code class="docutils literal notranslate"><span class="pre">tools</span> <span class="pre">conflict</span></code></p></li>
+<li><p>Display conflict set on screen: <code class="docutils literal notranslate"><span class="pre">display</span> <span class="pre">conflict</span> <span class="pre">all</span></code></p></li>
+<li><p>Write conflict set to conflict file: <code class="docutils literal notranslate"><span class="pre">write</span> <span class="pre">my_confliict_file</span> <span class="pre">clp</span></code>.</p></li>
+</ol>
+</section>
+<section id="d-3-references">
+<h2>D.3 References<a class="headerlink" href="#d-3-references" title="Permalink to this headline">#</a></h2>
+<p>[1] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=feasopt-what-is">What is FeasOpt?</a></p>
+<p>[2] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=feasopt-interpreting-output-from">Infeasibility vector from FeasOpt</a></p>
+<p>[3] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=conflicts-what-is-conflict">What is a Conflict</a></p>
+<p>[4] <a class="reference external" href="https://www-eio.upc.edu/lceio/manuals/cplex-11/html/usrcplex/refineConflict11.html">Interpreting Conflicts</a></p>
+<p>[5] <a class="reference external" href="https://osemosys.readthedocs.io/en/latest/manual/Debugging%20a%20model.html">Debugging an OSeMOSYS Model - Useful Tips</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "IESVIC2060/The_OSeMOSYS_EBook_by_IESVic",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Book_Files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Appendix_C.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Appendix C: Model Development Timeline</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../osemosys_notebook_version.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">IESVic OSeMOSYS Notebook</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-1-model-feasibility-infeasibility">D.1 Model Feasibility / Infeasibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-2-conflicts-and-the-conflict-refiner">D.2 Conflicts and the Conflict Refiner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-3-references">D.3 References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Cristiano Curi Fernandes
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
