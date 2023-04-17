@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5 Final Considerations and Laying the Way Forward &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/5_Final_Considerations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendix A: A Brief Insight Into the AMPL Modeling Language" href="Appendix_A.html" />
+    <link rel="prev" title="4 Model Debugging" href="4_Model_Debugging.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    The Pyomo Implementation of OSeMOSYS for British Columbia
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html">1 Introduction to Energy Modelling and OSeMOSYS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Introduction_to_Pyomo.html">2 Introduction to Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3_The_OSeMOSYS_Model_in_Pyomo.html">3 The OSeMOSYS Model in Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_Model_Debugging.html">4 Model Debugging</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5 Final Considerations and Laying the Way Forward</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_C.html">Appendix C: Model Development Timeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic/issues/new?title=Issue%20on%20page%20%2FBook_Files/5_Final_Considerations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Book_Files/5_Final_Considerations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5 Final Considerations and Laying the Way Forward</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5 Final Considerations and Laying the Way Forward</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">5.1 Conclusions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendations">5.2 Recommendations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-studying-resources">5.3 Further studying resources</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="final-considerations-and-laying-the-way-forward">
+<h1>5 Final Considerations and Laying the Way Forward<a class="headerlink" href="#final-considerations-and-laying-the-way-forward" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusions">
+<h1>5.1 Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h1>
+<p>This wiki summarizes the work developed at the Institute for Integrated Energy Systems at the University of Victoria to build an energy model for the province of British Columbia using the Python scripting language and the Pyomo software package for optimizatiion. In a series of 4 chapters we have walked through the purpose of the project, the reasoning behind the choice of Pyomo over MathProg for creating energy models and described the model implementation. Further we have explored a few tools that can help programmers and engineers debug their optimization models, by taking full advantage of Pyomo’s powerful functionalities in conjunction with any available solver, from free software (such as GLPK) to industry leading solvers like CPLEX.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="recommendations">
+<h1>5.2 Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">#</a></h1>
+<p>OSeMOSYS models will usually be robust, which increases running time for the solvers, and can make the debugging process take even more time. Debugging, in fact was the most time consuming component of this project.</p>
+<p>To reduce debugging time and increase the chances of your model working in its initial tests, we recommend a modularization of the program to be carried-out. This process is as simple as dividing the model into its subcomponents (sets, parameters, variables, objectives and constraints) and creating separate files for handling different aspects of the model (objective implementation, constraints implementation, data processing, etc.). This modular approach was incorporated into our model at the end, so you can look at this repository’s code to see how we went about modularizing our model.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="further-studying-resources">
+<h1>5.3 Further studying resources<a class="headerlink" href="#further-studying-resources" title="Permalink to this headline">#</a></h1>
+<p>[1] <a class="reference external" href="https://ampl.com/MEETINGS/TALKS/2018_08_Lille_Tutorial1.pdf">Model-based Optimization: Principles and Trends - AMPL</a></p>
+<p>[2] <a class="reference external" href="https://dtk.tankonyvtar.hu/xmlui/bitstream/handle/123456789/13112/tutorial_for_operations.pdf?sequence=1&amp;isAllowed=y">Tutorial for Operations Research: Modelling in GNU MathProg</a></p>
+<p>[3] <a class="reference external" href="https://iiasa.ac.at/web/home/research/Flagship-Projects/Global-Energy-Assessment/GEA_Chapter2_development_hires.pdf">Energy, Poverty and Development</a></p>
+<p>[4] <a class="reference external" href="https://ourworldindata.org/worlds-energy-problem">The World’s Energy Problem</a></p>
+<p>[5] <a class="reference external" href="http://www.osemosys.org/uploads/1/8/5/0/18504136/ceron_-_2006_-_the_gnu_linear_programming_kit_part_1_-_introduction_to_linear_optimization.pdf">GNU Linear Programming Kit, Part 1: Introduction to Linear Optimization: </a></p>
+<p>[6] <a class="reference external" href="https://pdf.sciencedirectassets.com/271090/1-s2.0-S0360544212X00100/1-s2.0-S0360544212006299/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEP7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJGMEQCIEHHW7w685OCY%2B%2FBmj6KOtarX4uWE4AtVOw%2FASct3PACAiAOdNRKUwERN0hM0fhO8oRYPNnVUySvNJJYzpGqi1HJdCqDBAjX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAQaDDA1OTAwMzU0Njg2NSIMAoGX%2FBtIuxSNEIBXKtcD4AoEqM8zdLNJmOz%2FJ2Pa074AnEwn3HxSz1LPvYyk4rxK6NUZAPTEfesy17Do%2BVy8HdaLVGJw6Y%2FEvI78GIsNx7Qw%2F5Siye7Itj9iw6ZpSeVXUuNV6AKyeFtgIZgoQaevcyIk%2BJfJPlED2O8eF4bjZJHndLeZMSpt8OJe1UQgPJ1%2F%2B%2BFQKm%2BqKVLPP4ol3PY%2F2zqOQ3nUUG4jnoxpIkTSsfresDrTilPdxeZefPsXgLYmxX2SzyTbe1M5ugCc54muM9R%2FZ413s4Em7qKlscCP%2BtARGAl4MGlr0pz2lZcQR91vF2KC022uY8IqxgfLvJSP5KmUFxct3U4xuuxvc24MaKk9kdjxZDoGX7J4aB2za4EVdIgjxH9E4Cx%2BEAiYXkO%2BlyHXHN4gS2Ps%2Fjy1ghLEW616fB1ZFZdRzWieLt8AMDsDOAahzujTLKjmgu%2BayfxN5V6H3TGx4%2F5sdcdt40P8uIb%2Bhmdoc7N%2FfmShgv%2FxM3X8MmHvFUnZZKcJ3iE1fKa9CJiF0HMxVi7sMRPyAP0ZXw6G18l1muaWI2DIMIm7EARECy2GwgYw0zx6xj1JjYRkTqYynvKHPkIPMYKs3IdNR7gdD4UCpd0MmT1g5iL4lAYIrle34SxoMKSOyI0GOqYBqzAJCmezK9MSZPw9kT%2BVwpA%2F6bOqXCc8w7WHCziRgehFZqN1oTTVAtG%2F68Y3Kzz7T6d%2B2wtAh5xQa%2BobfJhNxrY7BA0vvySIm%2FJfTdVx5i%2BLtrMXYU0A3ftzygUaWgtbiv9Y9w2NAEuzEOcuAvcEIbVulpeOk8kRqaoymOOs2LWq5pgk0gTLOJv%2FZ6br4e1gKhvEL4HtBoLWApw%2FQ%2BLTc85JGdZrXA%3D%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20211209T144141Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Credential=ASIAQ3PHCVTYRKINSYHI%2F20211209%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=0c8733a76e7f206ab9fdac65039196969b267e4c1b5405bf9c02be3051f342eb&amp;hash=fc07cbf85d1aae6b022f1e0322025f36ea6a600055aed84d8f11e93f7a3c8cf2&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S0360544212006299&amp;tid=spdf-517e9359-0e65-498b-9f88-96d493ea12eb&amp;sid=620708ee2d609842f359c1558c01a7e84c9egxrqa&amp;type=client">Modelling Elements of Smart Grids – Enhancing the OSeMOSYS (Open Source Energy Modelling System) Code</a></p>
+<p>[7] <a class="reference external" href="https://pdf.sciencedirectassets.com/271097/1-s2.0-S0301421510X00167/1-s2.0-S0301421511004897/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEP7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQCGGjmlVJRRoDGzg3f9%2B9q1PqiCSwVFOwsgUQmI39EZXwIhAOG3BBvpewgT6dhYVo5C6VO9YwlkN1ooBcddunMtWBx3KoMECNf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBBoMMDU5MDAzNTQ2ODY1Igy69%2F2yY6m49tug%2BVUq1wN3bOY4LYHx7kknzYLzpz6TNPk%2BTXo5fVp1jI8jJ1OJz%2B3qHMHxR2rL1iEDDNxnuZTjHwgflAi1kwgFDe%2B3lawNTx0gzCMok35M32SVR5mMXJpz%2BRoqPIFfxNYl5TZPlLBW4g9ZTLuxsVTF6NgV5vjumxvIYmX2TUAnKoZpBMjw1W86Wm%2BkPcee1otNbKx3aB3nZvMTnVgv9zOPWySQazx2Rx7R%2BNWJArJQgkPb4BbE7J6rOUkqSZlNKguweFoxiwRqbzg%2BUoX43F6wADmeNwgFtTDr%2BzDVro3Cg6urlX17jRuEExdJq91Z57zzSIClRSiVKV5srs%2FHDfB1w0G6IC29dOwbls4Gz1PKQ8o0Ipav01mAPwqbXwhXILIyT5WrSq1UOA40UL5ijunGBSskRsJ6EQipAFnq9aCXIYwp%2BVF4iboLVLjikqaue3nIafvhhKqfzxVQswHmWh%2FDAM2qhHtpIku6lNrEPfb3AM3g7yX8evkdvnCBUzP7I4SznBZ2FEjxs%2BUHcmMBfhmpvY3FTp2l5xRf%2F59EmPnvHJOAX%2FZ%2Bi0Xvp3ENlzP3BaDLVbJOaeNPYFjc5Otp85G88IjgC9Hva%2FEPp0CKrWHyzn811cbA%2BWkH8B6qG9Qwho%2FIjQY6pAHNcXNMBIwYHRm%2FSrwS8Z4VGXLgcZDTHp45A8JoFMAajjxZSkBGNw5jnK1Zi6aMC%2Bnp%2F7EElxh76IaPdT2%2F8Cih%2B3Pw2UAwrvI40VEoHKPaediRlDIEGndhzJQ5l7zxu0b5Jsk6bZ4Vjaf9ZwjaDPYDwiZCKhsZqUYPytunAaMCfo9pzm0uVYmQ0mCOjaChnXCWvmRUmOHEsFhN7HhGDrteaLr93Q%3D%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20211209T144215Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Credential=ASIAQ3PHCVTY4OAYGPEA%2F20211209%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=931ec264c46bd922e7df68dee00ae2d885f4e6bbba55c62c370c64a99ea95700&amp;hash=24a4e26858be80ad47b5725a7428cb7ec6c435b6997084afd7afa1532edfd3d1&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S0301421511004897&amp;tid=spdf-88d89345-ecb8-41ea-8d7a-f0b18d4cb95d&amp;sid=620708ee2d609842f359c1558c01a7e84c9egxrqa&amp;type=client">OSeMOSYS: The Open Source Energy Modeling System An introduction to its ethos, structure and development</a></p>
+<p>[8] <a class="reference external" href="https://groups.google.com/g/pyomo-forum">Pyomo Forum - Google Groups</a></p>
+<p>[9] <a class="reference external" href="https://groups.google.com/g/osemosys">OSeMOSYS Forum - Google Groups</a></p>
+<p>[10] <a class="reference external" href="https://link.springer.com/book/10.1007/978-981-13-6221-7">Energy Systems Modeling Book</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "IESVIC2060/The_OSeMOSYS_EBook_by_IESVic",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Book_Files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_Model_Debugging.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4 Model Debugging</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Appendix_A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Appendix A: A Brief Insight Into the AMPL Modeling Language</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5 Final Considerations and Laying the Way Forward</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">5.1 Conclusions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendations">5.2 Recommendations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-studying-resources">5.3 Further studying resources</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Cristiano Curi Fernandes
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

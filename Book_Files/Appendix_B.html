@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Appendix B: OSeMOSYS Storage Dynamics &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/Appendix_B';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendix C: Model Development Timeline" href="Appendix_C.html" />
+    <link rel="prev" title="Appendix A: A Brief Insight Into the AMPL Modeling Language" href="Appendix_A.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    The Pyomo Implementation of OSeMOSYS for British Columbia
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_Introduction_to_Energy_Modelling_and_OSeMOSYS.html">1 Introduction to Energy Modelling and OSeMOSYS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Introduction_to_Pyomo.html">2 Introduction to Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3_The_OSeMOSYS_Model_in_Pyomo.html">3 The OSeMOSYS Model in Pyomo</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_Model_Debugging.html">4 Model Debugging</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="5_Final_Considerations.html">5 Final Considerations and Laying the Way Forward</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Appendix B: OSeMOSYS Storage Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_C.html">Appendix C: Model Development Timeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/IESVIC2060/The_OSeMOSYS_EBook_by_IESVic/issues/new?title=Issue%20on%20page%20%2FBook_Files/Appendix_B.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Book_Files/Appendix_B.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Appendix B: OSeMOSYS Storage Dynamics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-modes-of-operation">B.1 Modes of Operation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-turning-storage-on-and-off">B.2 Turning Storage On and Off</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-debugging-problems-with-storage">B.3 Debugging Problems With Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-1-parameter-manipulations-to-watch-out-for">B.3.1 Parameter Manipulations to Watch Out for</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-4-references">B.4 References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="appendix-b-osemosys-storage-dynamics">
+<h1>Appendix B: OSeMOSYS Storage Dynamics<a class="headerlink" href="#appendix-b-osemosys-storage-dynamics" title="Permalink to this headline">#</a></h1>
+<p>Storage is an important part of any energy system model spanning through multiple seasons. As such, it is essential that any modeler understands the dynamics of the flow of energy through a reference energy system (RES) when storage is envolved. The OSeMOSYS interpretation of storage in a RES is quite convoluted and can lead to a few misunderstandings of how storage works. This appendix aims at clarifying these common misunderstandings and presenting the storage dynamics in OSeMOSYS as a powerful tool to model real world systems.</p>
+<p>As was explained in chapters 2 and 3 of this wiki, OSeMOSYS makes use of parameters to capture the different aspects of the RES which have a direct impact over system performance, a few of which are linked to storage dynamics. That is, if your model implementation is correct, then storage can be included, or excluded from your model by simply turning its related parameters on, or off.</p>
+<section id="b-1-modes-of-operation">
+<h2>B.1 Modes of Operation<a class="headerlink" href="#b-1-modes-of-operation" title="Permalink to this headline">#</a></h2>
+<p>A “mode of operation” in OSeMOSYS is a set which defines the operating regime of a technology in the model. A technology can assume many roles over the time span of a model, some examples being producing different kinds of energy (heat, or electricity), contributing to, or taking energy from storage, and outputing different types of fuels into the energy grid (contributing to gas mixtures). All of these activities will have a different mode of operation assigned to each one of them.</p>
+<p>For the scope of this appendix, the mode of operation business can be quite useful for making sure that a technology will never interact with storage facilities, if your RES determines it to be the case. This is possible because the <code class="docutils literal notranslate"><span class="pre">Mode_of_Operation</span></code> set is a part of both the <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> activity ratio parameters, as well as the <code class="docutils literal notranslate"><span class="pre">Variable_Cost</span></code> parameter. These parameters will define the ratio of fuels being contributed to, and by the technology, and the variable operation and maintenance (O&amp;M) costs to each technology, respectively.</p>
+<p>Assignment of a wrong mode of operation to in any given parameter for a technology can lead to unexpected, or unwanted results. This topic will be re-addressed later when we approach some techniques for debugging storage.</p>
+</section>
+<section id="b-2-turning-storage-on-and-off">
+<h2>B.2 Turning Storage On and Off<a class="headerlink" href="#b-2-turning-storage-on-and-off" title="Permalink to this headline">#</a></h2>
+<p>The storage dynamics inside na OSeMOSYS model are controlled by the storage parameters, which are applied to each and every storage set. A storage set is a matrix index inside the linear program model that captures the facilities used to store energy for later use over the whole time period.</p>
+<p>The following parameters are used by the Pyomo model to control the energy flux in the energy system and determine the use of storage facilities:</p>
+<ul class="simple">
+<li><p>Input activity ratio: “Rate of use of a commodity (fuel) by a technology, as a ratio of the rate of activity (use of a technology over the model year).”</p></li>
+<li><p>Output activity ratio: “Rate of commodity (fuel) output from a technology, as a ratio of the rate of activity (use of a technology over the model year).”</p></li>
+<li><p>Variable cost: “Cost of a technology for a given mode of operation (Variable O&amp;M cost), per unit of activity.” If a given mode of operation is being used by the model to transmit energy from storage to a technology, then the variable cost for that technology at that mode of operation can act as a constraint to storage usage by that technology.</p></li>
+<li><p>Technology to storage and technology from storage: These two parameters assume binary values only (0 = off, 1 = on), which determine if the communication link between a technology and a storage unit exist for charging and discharging that storage facility, respectively.</p></li>
+<li><p>Storage Level Start: This is the total amount of energy (in MW) given to a storage facility at the start of the model execution.</p></li>
+<li><p>Storage Level Finish: This is the desired amount of energy (in MW) that a storage facility has to retain at the end of the model execution</p></li>
+<li><p>Min Storage Charge: This parameter sets the minimum amount of stored energy (in MW) to be present in a storage facility at any time slice as a fraction (percentage from 0 to 1) of the maximum set at the start (Storage Level Start).</p></li>
+<li><p>Storage Max Charge Rate: “Maximum charging rate for the storage, in units of activity per year.”</p></li>
+<li><p>Storage Max Discharge Rate: “Maximum discharging rate for the storage, in units of activity per year.”</p></li>
+</ul>
+<p>From the list of parameters which control storage in OSeMOSYS, we see that this functionality can be “turned on” or “off” via different ways. For instance, storage can be deactivated by:</p>
+<ul class="simple">
+<li><p>Assigning a Min Storage Charge  of 1 (100%) to a storage facility, making it so storage never depleats</p></li>
+<li><p>Equating the Storage Level Start and Storage Level Finish parameters, essentially determining that storage won’t change over time</p></li>
+<li><p>Turning off the output activity ratio of the extraction technologies, since this won’t allow the extractors to supply the system with energy coming from storage (maintaining storage levels at storage level start)</p></li>
+<li><p>Giving the storage facility a Storage Max Discharge Rate of 0, essentially prohibiting it from discharging its contents into the system.</p></li>
+</ul>
+</section>
+<section id="b-3-debugging-problems-with-storage">
+<h2>B.3 Debugging Problems With Storage<a class="headerlink" href="#b-3-debugging-problems-with-storage" title="Permalink to this headline">#</a></h2>
+<p>In this section we will look into a few ways in which storage might not operate correctly inside the OSeMOSYS model and how to address those issues.</p>
+<section id="b-3-1-parameter-manipulations-to-watch-out-for">
+<h3>B.3.1 Parameter Manipulations to Watch Out for<a class="headerlink" href="#b-3-1-parameter-manipulations-to-watch-out-for" title="Permalink to this headline">#</a></h3>
+<p>Changing a few parameters might not cause the intended effect on the model results. Here are some notable examples:</p>
+<ul class="simple">
+<li><p>Turning TechnologyToStorage and TechnologyFromStorage off (0) won’t turn off storage, but will make the initial level for that storage unit depleat at the first time slice (going from time slice 1 to time slice 2 depleats the entire storage unit)</p></li>
+<li><p>Turning the Input Activity Ratio of a technology that feeds a storage facility off (0) won’t turn off storage, if the storage level start is greater than 0, since the storage will have some energy to give to the extraction technologies.</p></li>
+</ul>
+</section>
+</section>
+<section id="b-4-references">
+<h2>B.4 References<a class="headerlink" href="#b-4-references" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://osemosys.readthedocs.io/en/latest/manual/Structure%20of%20OSeMOSYS.html">OSeMOSYS Structure</a></p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "IESVIC2060/The_OSeMOSYS_EBook_by_IESVic",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Book_Files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Appendix_A.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Appendix A: A Brief Insight Into the AMPL Modeling Language</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Appendix_C.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Appendix C: Model Development Timeline</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-modes-of-operation">B.1 Modes of Operation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-turning-storage-on-and-off">B.2 Turning Storage On and Off</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-debugging-problems-with-storage">B.3 Debugging Problems With Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-1-parameter-manipulations-to-watch-out-for">B.3.1 Parameter Manipulations to Watch Out for</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-4-references">B.4 References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Cristiano Curi Fernandes
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
