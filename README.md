@@ -16,22 +16,22 @@ This book contains the basics of the project's development with detailed explana
 
 # Table of Contents
 
-## [1 - Introduction_to_Energy_Modelling_and_OSeMOSYS](Book_Files\1_Introduction_to_Energy_Modelling_and_OSeMOSYS.md)
+## [1 - Introduction_to_Energy_Modelling_and_OSeMOSYS](Book_Files/1_Introduction_to_Energy_Modelling_and_OSeMOSYS.md)
 
-## [2 - Introduction to Pyomo](Book_Files\2_Introduction_to_Pyomo.md)
+## [2 - Introduction to Pyomo](Book_Files/2_Introduction_to_Pyomo.md)
 
-## [3 - The OSeMOSYS Model in Pyomo](Book_Files\3_The_OSeMOSYS_Model_in_Pyomo.md)
+## [3 - The OSeMOSYS Model in Pyomo](Book_Files/3_The_OSeMOSYS_Model_in_Pyomo.md)
 
-## [4 - Model Debugging](Book_Files\4_Model_Debugging.md)
+## [4 - Model Debugging](Book_Files/4_Model_Debugging.md)
 
-## [5 - Final Considerations](Book_Files\5_Final_Considerations.md)
+## [5 - Final Considerations](Book_Files/5_Final_Considerations.md)
 
-## [Appendix A - A Brief Insight Into the AMPL Modeling Language](Book_Files\Appendix_A.md)
+## [Appendix A - A Brief Insight Into the AMPL Modeling Language](Book_Files/Appendix_A.md)
 
-## [Appendix B - OSeMOSYS Storage Dynamics](Book_Files\Appendix_B.md)
+## [Appendix B - OSeMOSYS Storage Dynamics](Book_Files/Appendix_B.md)
 
-## [Appendix C - Model Development Timeline](Book_Files\Appendix_C.md)
+## [Appendix C - Model Development Timeline](Book_Files/Appendix_C.md)
 
-## [Appendix D - Overview of CPLEX Debugging](Book_Files\Appendix_D.md)
+## [Appendix D - Overview of CPLEX Debugging](Book_Files/Appendix_D.md)
 
 ## [IESVic OSeMOSYS Notebook - Exercises and Practice](osemosys_notebook_version.ipynb)
