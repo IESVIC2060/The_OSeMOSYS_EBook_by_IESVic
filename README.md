@@ -29,8 +29,6 @@ This book contains the basics of the project's development with detailed explana
 
 ## [Appendix B - OSeMOSYS Storage Dynamics](Book_Files/Appendix_B.md)
 
-## [Appendix C - Model Development Timeline](Book_Files/Appendix_C.md)
-
-## [Appendix D - Overview of CPLEX Debugging](Book_Files/Appendix_D.md)
+## [Appendix C - Overview of CPLEX Debugging](Book_Files/Appendix_C.md)
 
 ## [IESVic OSeMOSYS Notebook - Exercises and Practice](Book_Files/osemosys_notebook_version.ipynb)

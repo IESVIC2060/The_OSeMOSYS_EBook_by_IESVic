@@ -14,5 +14,5 @@ chapters:
 - file: Book_Files/Appendix_A
 - file: Book_Files/Appendix_B
 - file: Book_Files/Appendix_C
-- file: Book_Files/Appendix_D
+#- file: Book_Files/Appendix_D
 - file: Book_Files/osemosys_notebook_version

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Appendix C: Model Development Timeline &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
+    <title>Appendix C: Overview of CPLEX Debugging &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
   
   
   
@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/Appendix_C';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Appendix D: Overview of CPLEX Debugging" href="Appendix_D.html" />
+    <link rel="next" title="IESVic OSeMOSYS Notebook" href="osemosys_notebook_version.html" />
     <link rel="prev" title="Appendix B: OSeMOSYS Storage Dynamics" href="Appendix_B.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -181,8 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="Appendix_A.html">Appendix A: A Brief Insight Into the AMPL Modeling Language</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Appendix_B.html">Appendix B: OSeMOSYS Storage Dynamics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Appendix C: Model Development Timeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Appendix_D.html">Appendix D: Overview of CPLEX Debugging</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Appendix C: Overview of CPLEX Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="osemosys_notebook_version.html">IESVic OSeMOSYS Notebook</a></li>
 
 
@@ -374,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Appendix C: Model Development Timeline</h1>
+    <h1>Appendix C: Overview of CPLEX Debugging</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,11 +383,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-phase-1-electricity-demand-and-hydro-production">C.1 Phase 1 - Electricity Demand and Hydro Production</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-phase-2-adding-water-heat-demand-and-technologies">C.2 Phase 2 - Adding Water Heat Demand and Technologies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-phase-3-heat-pump">C.3 Phase 3 - Heat Pump</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-4-phase-4-simplified-hydrogen-and-electric-storages">C.4 Phase 4 - Simplified Hydrogen and Electric Storages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5-phase-5-splitting-hydro-production">C.5 Phase 5 - Splitting Hydro Production</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-model-feasibility-infeasibility">C.1 Model Feasibility / Infeasibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-conflicts-and-the-conflict-refiner">C.2 Conflicts and the Conflict Refiner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-references">C.3 References</a></li>
 </ul>
             </nav>
         </div>
@@ -400,62 +397,47 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="appendix-c-model-development-timeline">
-<h1>Appendix C: Model Development Timeline<a class="headerlink" href="#appendix-c-model-development-timeline" title="Permalink to this headline">#</a></h1>
-<p>The OSeMOSYS model in this repository wa developed in a modular fashion, with 6 (six) different phases of upgrades. This appendix describes theses phases in detail, as well as show their reference energy systems.</p>
-<p>This model is based off of the “toy model” by Cristiano Fernandes which can be found in <a class="reference external" href="https://github.com/IESVIC2060/Storage-Master/tree/Working_Branch/Model-Data/Cristiano_Toy_Model">this folder</a> inside this GitHub repository.</p>
-<section id="c-1-phase-1-electricity-demand-and-hydro-production">
-<h2>C.1 Phase 1 - Electricity Demand and Hydro Production<a class="headerlink" href="#c-1-phase-1-electricity-demand-and-hydro-production" title="Permalink to this headline">#</a></h2>
-<p>The additions made to this mopdel for phase 1, ontop of the toy model were the following:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="appendix-c-overview-of-cplex-debugging">
+<h1>Appendix C: Overview of CPLEX Debugging<a class="headerlink" href="#appendix-c-overview-of-cplex-debugging" title="Permalink to this headline">#</a></h1>
+<p>The debugging process is at the core of of any mathematical program model. In this project, we used the CPLEX solver as the main optimizer for the model. In chapter 4, we briefly introduced the use of the CPLEX optimization suite to probe your model’s solution; now, we will explore some of the nuances of the solver to better guide your debugging process.</p>
+<p>CPLEX is a robust linear optimizer for your machine, and as such, it has many applications and tools to help the user debug and increase the performance of their model. In this appendix we will be exploring the conflict refiner and some of the nuances of model infeasibility, but if you wish to dive deeper into CPLEX and better understand the software as a whole, then check their <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex-users-manual">user manual</a>.</p>
+<p>The following flowchart summarizes the contents of this appendix and serves as a guide for model debugging in CPLEX.</p>
+<p><img alt="" src="../_images/CPLEX_Debug_Flowchart.png" /></p>
+<section id="c-1-model-feasibility-infeasibility">
+<h2>C.1 Model Feasibility / Infeasibility<a class="headerlink" href="#c-1-model-feasibility-infeasibility" title="Permalink to this headline">#</a></h2>
+<p>The most common case in which one would want to use the CPLEX optimizer IDE is to debug a model and trace the origin of an infeasibility. While there are many reasons for model infeasibilities, the CPLEX solver allows the user to dissect a model from its <code class="docutils literal notranslate"><span class="pre">lp</span></code> file, therefore, as it was explained in chapter 4, the debugging process for any model begins with reading its <code class="docutils literal notranslate"><span class="pre">.lp</span></code> file, which pyomo can write upon request (read chapter 4 for further details).</p>
+<p>After reading the <code class="docutils literal notranslate"><span class="pre">.lp</span></code> file, it is common practice to solve the model again inside the CPLEX IDE using the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> command. If the model is infeasible, CPLEX will trace the cause of the infeasibility, usually, to either a <strong>row</strong>, or a <strong>column</strong>, which denotes a problem with a given constraint, or variable, respectively. Sometimes, just knowing if the problem resides with a variable, or a constraint can mean an easy fix to the constraint declaration, or a slight change to the input parameters can get rid of the infeasibility. Other times it can be quite hard to know which portion of input data is causing the problem, or how exactly to alter the solution space to accomodate the infeasibility.</p>
+<p>To deal with more convoluted infeasibilities, it is recommended that the user calls the <code class="docutils literal notranslate"><span class="pre">feasopt</span></code> command from the CPLEX IDE. This command will allow the solver to perform boundary relaxations, which will give an output suggesting the least change (minimum variation) to the objective that would achieve feasibility. “FeasOpt does not actually modify your model. Instead, it suggests a set of bounds and constraint ranges and produces the solution that would result from these relaxations [1].”</p>
+<p>The output from the command will give a relaxation amount that is to be applied to the infeasible variable, or constraint. This amount (vector) will be positive or negative depending upon the kind of constraint or variable bound which is infeasible, or it will be 0 (zero) if the model is already feasible [2].</p>
 <ul class="simple">
-<li><p>Hydro as a production technology</p></li>
-<li><p>Electricity distribution network</p></li>
-<li><p>Electricity demand</p></li>
-<li><p>1 dummy technology as an electricity consumer (i.e any kitchen applience, or any other electric device connected to the grid)</p></li>
+<li><p>Less-than-or-equal-to constraint / variable upper bound: positive vector (add amount to constraint / variable)</p></li>
+<li><p>Greather-than-or-equal-to constraint / variable lower bound: negative vector (subtract amount from constraint / variable)</p></li>
+<li><p>Equal-to constraint: in this case the feasibility vector will be dependent on what inequality causes the infeasibility:</p>
+<ol class="arabic simple">
+<li><p>The constraint’s RHS &gt; LHS: vector is negative (subtract amount from constraint)</p></li>
+<li><p>The constraint’s RHS &lt; LHS: vector is positive (add amount to constraint)</p></li>
+</ol>
+</li>
 </ul>
-<p>The figure below represents the reference energy system for this stage of development.</p>
-<p><img alt="" src="../_images/Kevin_RES_V1.drawio.png" /></p>
 </section>
-<section id="c-2-phase-2-adding-water-heat-demand-and-technologies">
-<h2>C.2 Phase 2 - Adding Water Heat Demand and Technologies<a class="headerlink" href="#c-2-phase-2-adding-water-heat-demand-and-technologies" title="Permalink to this headline">#</a></h2>
-<p>In this phase the following additions have been made:</p>
-<ul class="simple">
-<li><p>Water heat demand</p></li>
-<li><p>Electric and gas water heaters as consumer technologies</p></li>
-</ul>
-<p>The figure below represents the reference energy system for this stage of development.</p>
-<p><img alt="" src="../_images/Kevin_RES_V2.png" /></p>
+<section id="c-2-conflicts-and-the-conflict-refiner">
+<h2>C.2 Conflicts and the Conflict Refiner<a class="headerlink" href="#c-2-conflicts-and-the-conflict-refiner" title="Permalink to this headline">#</a></h2>
+<p>Sometimes, a model can become infeasible due to a wrong declaration of a constraint, or because input data is drastically skewing constraints and re-shaping the solution space, such that its boundaries are conflicting with each other. A conflict is simply a set of mutually contradicting constraints and / or variable bounds in a model [3].</p>
+<p>Luckly, CPLEX provides its user with a <strong>conflict refiner</strong> tool which can bring light to the conflict set. To invoke the conflict refiner from within the IDE in the command line, the user must navigate to the <code class="docutils literal notranslate"><span class="pre">tools</span></code> menu, which can be done with the following command: <code class="docutils literal notranslate"><span class="pre">tools</span> <span class="pre">conflict</span></code>. This will output the conflict set (number of conflicting constraints and variable bounds). If you wish to have the entire conflict set printed out onto the screen, you can do so with the <code class="docutils literal notranslate"><span class="pre">display</span></code> command as follows: <code class="docutils literal notranslate"><span class="pre">display</span> <span class="pre">conflict</span> <span class="pre">all</span></code>. Or, you may have the set printed out to a separate file by writting a conflict file: <code class="docutils literal notranslate"><span class="pre">write</span> <span class="pre">my_confliict_file</span> <span class="pre">clp</span></code>.</p>
+<p>The conflict refiner must first be called to analyze the model for possible conflucts before the conflict set can be displayed, that is, if you first try to write the conflict set, before calling thr conflict refiner, CPLEX will simply say your model has no conflicts when it may, in fact, contain some. In summary, the commands related to the conflict refiner are listed below.</p>
+<ol class="arabic simple">
+<li><p>Invoke conflict refiner: <code class="docutils literal notranslate"><span class="pre">tools</span> <span class="pre">conflict</span></code></p></li>
+<li><p>Display conflict set on screen: <code class="docutils literal notranslate"><span class="pre">display</span> <span class="pre">conflict</span> <span class="pre">all</span></code></p></li>
+<li><p>Write conflict set to conflict file: <code class="docutils literal notranslate"><span class="pre">write</span> <span class="pre">my_confliict_file</span> <span class="pre">clp</span></code>.</p></li>
+</ol>
 </section>
-<section id="c-3-phase-3-heat-pump">
-<h2>C.3 Phase 3 - Heat Pump<a class="headerlink" href="#c-3-phase-3-heat-pump" title="Permalink to this headline">#</a></h2>
-<p>In this phase the following additions have been made:</p>
-<ul class="simple">
-<li><p>Heat pump as a space heater</p></li>
-</ul>
-<p>The figure below represents the reference energy system for this stage of development.</p>
-<p><img alt="" src="../_images/Kevin_RES_V3.png" /></p>
-</section>
-<section id="c-4-phase-4-simplified-hydrogen-and-electric-storages">
-<h2>C.4 Phase 4 - Simplified Hydrogen and Electric Storages<a class="headerlink" href="#c-4-phase-4-simplified-hydrogen-and-electric-storages" title="Permalink to this headline">#</a></h2>
-<p>In this phase the following additions have been made:</p>
-<ul class="simple">
-<li><p>Electricity Storage</p></li>
-<li><p>Hydrogen Storage at a third mode of operation and outputing into the gas distribution pipeline (forming a gas mixturein the pipeline)</p></li>
-<li><p>Electrolyzer as input to the hydrogen storage (simplified version for hydogen storage)</p></li>
-</ul>
-<p>The figure below represents the reference energy system for this stage of development.</p>
-<p><img alt="" src="../_images/Kevin_RES_V4.png" /></p>
-</section>
-<section id="c-5-phase-5-splitting-hydro-production">
-<h2>C.5 Phase 5 - Splitting Hydro Production<a class="headerlink" href="#c-5-phase-5-splitting-hydro-production" title="Permalink to this headline">#</a></h2>
-<p>In this phase the following additions have been made:</p>
-<ul class="simple">
-<li><p>Hydro flexible production technology</p></li>
-<li><p>Hydrogen storage operating at the second mode of operation</p></li>
-<li><p>Electrolyzer as hydrogen production only (no longer inputting into hydrogen storage)</p></li>
-</ul>
-<p>The figure below represents the reference energy system for this stage of development.</p>
-<p><img alt="" src="../_images/Kevin_RES_V5.png" /></p>
+<section id="c-3-references">
+<h2>C.3 References<a class="headerlink" href="#c-3-references" title="Permalink to this headline">#</a></h2>
+<p>[1] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=feasopt-what-is">What is FeasOpt?</a></p>
+<p>[2] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=feasopt-interpreting-output-from">Infeasibility vector from FeasOpt</a></p>
+<p>[3] <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=conflicts-what-is-conflict">What is a Conflict</a></p>
+<p>[4] <a class="reference external" href="https://www-eio.upc.edu/lceio/manuals/cplex-11/html/usrcplex/refineConflict11.html">Interpreting Conflicts</a></p>
+<p>[5] <a class="reference external" href="https://osemosys.readthedocs.io/en/latest/manual/Debugging%20a%20model.html">Debugging an OSeMOSYS Model - Useful Tips</a></p>
 </section>
 </section>
 
@@ -500,11 +482,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Appendix_D.html"
+       href="osemosys_notebook_version.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Appendix D: Overview of CPLEX Debugging</p>
+        <p class="prev-next-title">IESVic OSeMOSYS Notebook</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -526,11 +508,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-phase-1-electricity-demand-and-hydro-production">C.1 Phase 1 - Electricity Demand and Hydro Production</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-phase-2-adding-water-heat-demand-and-technologies">C.2 Phase 2 - Adding Water Heat Demand and Technologies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-phase-3-heat-pump">C.3 Phase 3 - Heat Pump</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-4-phase-4-simplified-hydrogen-and-electric-storages">C.4 Phase 4 - Simplified Hydrogen and Electric Storages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5-phase-5-splitting-hydro-production">C.5 Phase 5 - Splitting Hydro Production</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1-model-feasibility-infeasibility">C.1 Model Feasibility / Infeasibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-2-conflicts-and-the-conflict-refiner">C.2 Conflicts and the Conflict Refiner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-3-references">C.3 References</a></li>
 </ul>
   </nav></div>
 
