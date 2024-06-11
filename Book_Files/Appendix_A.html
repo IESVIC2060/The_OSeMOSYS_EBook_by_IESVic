@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Appendix A: A Brief Insight Into the AMPL Modeling Language &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
   
@@ -15,58 +14,56 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=5eb1bb1e"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/Appendix_A';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Appendix B: OSeMOSYS Storage Dynamics" href="Appendix_B.html" />
     <link rel="prev" title="5 Final Considerations and Laying the Way Forward" href="5_Final_Considerations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -74,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,9 +137,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../README.html">
+  
   
   
   
@@ -140,12 +151,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -205,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -214,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -343,20 +365,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -400,26 +424,26 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="appendix-a-a-brief-insight-into-the-ampl-modeling-language">
-<h1>Appendix A: A Brief Insight Into the AMPL Modeling Language<a class="headerlink" href="#appendix-a-a-brief-insight-into-the-ampl-modeling-language" title="Permalink to this headline">#</a></h1>
+<h1>Appendix A: A Brief Insight Into the AMPL Modeling Language<a class="headerlink" href="#appendix-a-a-brief-insight-into-the-ampl-modeling-language" title="Link to this heading">#</a></h1>
 <section id="a-1-what-is-ampl">
-<h2>A.1 What is AMPL?<a class="headerlink" href="#a-1-what-is-ampl" title="Permalink to this headline">#</a></h2>
+<h2>A.1 What is AMPL?<a class="headerlink" href="#a-1-what-is-ampl" title="Link to this heading">#</a></h2>
 <p>AMPL is a programming language for mathematical programming. It was designed and implemented in 1985 by Robert Fourer, David M. Gay, and Brian W. Kernighan, who are the authors of the <a class="reference external" href="https://ampl.com/resources/the-ampl-book/chapter-downloads/">AMPL book</a>. A mathematical programming problem is an optimization problem tackled through an algorithmic manner, which is better described through mathematical terms that are interpreted by the computer through the use of languages such as AMPL.</p>
 <p>The problems that require the employment of AMPL usually arise from the abstraction of a real world situation, for which a model is formulated, such that its whole can be broken apart into variables, sets, parameters, constraints and the objectives, or goals of the engineering team. These problems expect real world data, most often from past iterations of the problem, or from similar occurances in different scenarios, that is then incorporated into the model and passed down to a <code class="docutils literal notranslate"><span class="pre">solver</span></code>, which produces the relevant results. The results can then be analyzed to better inform the engineers on how to refine theproblem definition to achieve the desired outcome.</p>
 </section>
 <section id="a-2-ampl-and-pyomo">
-<h2>A.2 AMPL and Pyomo<a class="headerlink" href="#a-2-ampl-and-pyomo" title="Permalink to this headline">#</a></h2>
+<h2>A.2 AMPL and Pyomo<a class="headerlink" href="#a-2-ampl-and-pyomo" title="Link to this heading">#</a></h2>
 <p>As we have seen in chapter 2, Pyomo provides the same capabilities as AMPL, as such, the data files used for Pyomo models are structured in the same format as for AMPL models. Now, we shall see how these data files are written so they can be properly interpreted by the solver.</p>
 </section>
 <section id="a-3-how-to-write-an-ampl-data-file">
-<h2>A.3 How to Write an AMPL data file<a class="headerlink" href="#a-3-how-to-write-an-ampl-data-file" title="Permalink to this headline">#</a></h2>
+<h2>A.3 How to Write an AMPL data file<a class="headerlink" href="#a-3-how-to-write-an-ampl-data-file" title="Link to this heading">#</a></h2>
 <p>In linear programming and mathematical programming, in general, data is represented in matrix form. In AMPL data is also represented in this way.</p>
 <p>In a similar fashion to a Pyomo script, when creating an AMPL data file the user should declare the model’s sets and parameters prefaced by the command <code class="docutils literal notranslate"><span class="pre">set</span></code> and <code class="docutils literal notranslate"><span class="pre">param</span></code>, respectively. The difference between the Pyomo and the data files, however, is that in the data file, the sets and parameters are accompained by their respective values. After declaring a set, or a parameter, the data values are to be written in a matrix-like arrangement that is similar to how they would be written mathematically.</p>
 <p>Typically, sets are one-dimensional vectors and parameters are multidimensional matrices, of the third, fourth, or even higher orders. Let us now see some examples of declaring sets and parameters in a data file and how they are interpreted by the solver.</p>
 <section id="example-1-set-declarations">
-<h3>Example 1: set declarations:<a class="headerlink" href="#example-1-set-declarations" title="Permalink to this headline">#</a></h3>
+<h3>Example 1: set declarations:<a class="headerlink" href="#example-1-set-declarations" title="Link to this heading">#</a></h3>
 <p>When declaring a set in AMPL, it can assume many different form, but the central idea behind their purpose is the sam: <strong>they will be used to index a model parameter</strong>, that is, they are to be understood as labels for lines and columns of a parameter matrix that will later be constructed.</p>
 <p><img alt="" src="Images/AMPL%20Set%20Declaration%20Example.jpg" /></p>
 <p><img alt="" src="Images/AMPL%20Parameter%20Declaration%20Example.jpg" /></p>
@@ -427,16 +451,16 @@ document.write(`
 <p><img alt="" src="Images/AMPL%20Default%20Keyword%20Example.jpg" /></p>
 </section>
 <section id="example-2-multidimensional-parameters">
-<h3>Example 2: multidimensional parameters:<a class="headerlink" href="#example-2-multidimensional-parameters" title="Permalink to this headline">#</a></h3>
+<h3>Example 2: multidimensional parameters:<a class="headerlink" href="#example-2-multidimensional-parameters" title="Link to this heading">#</a></h3>
 <p>When declaring parameters, it is important that the respective indexing sets are correctly declared within the model file (in Pyomo), but that is not necessary within data files, since the solver will deduce that any missing set will have the default value in its position. For multidimensional parameters (parameters indexed by more than one set), however, the sets must always be specified in order to construct a full matrix for that parameter. To declare a multidimensional parameter we use the square brackets ([<em>,</em>]) notation, as in the example below.</p>
 <p><img alt="" src="Images/AMPL%20Multidimensional%20Parameter%20Declaration%20Example.jpg" /></p>
 <p>This same notation can be used for as many dimensions as the parameter requires and it follows the same pattern: <code class="docutils literal notranslate"><span class="pre">param</span> <span class="pre">B:</span> <span class="pre">=</span> <span class="pre">[fixed_index,</span> <span class="pre">*]</span> <span class="pre">variable_index</span> <span class="pre">value</span></code>, where the asterisk will represenst a variable set for that declaration, while the other values within the brackets are fixed indexes for that declaration; the values that follow the closing bracket will replace the asterisks, or will represent the value to be input into the matrix by the solver, if the variable sets for that iteration have already replaced the asterisks.</p>
 </section>
 </section>
 <section id="a-4-references">
-<h2>A.4 References<a class="headerlink" href="#a-4-references" title="Permalink to this headline">#</a></h2>
+<h2>A.4 References<a class="headerlink" href="#a-4-references" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=gGQBpTtsRVw&amp;list=TLPQMTYwNTIwMjIoQEz8T5s7TA&amp;">Mathematical Programming With AMPL | Brian Kernighan and Lex Fridman</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=gGQBpTtsRVw&amp;amp;list=TLPQMTYwNTIwMjIoQEz8T5s7TA&amp;amp;">Mathematical Programming With AMPL | Brian Kernighan and Lex Fridman</a></p></li>
 <li><p><a class="reference external" href="https://link.springer.com/chapter/10.1007/978-1-4614-3226-5_6">Initializing Abstract Models with Data Command Files - Pyomo</a></p></li>
 </ol>
 </section>
@@ -467,11 +491,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="5_Final_Considerations.html"
@@ -491,10 +514,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -502,6 +522,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -538,9 +559,10 @@ By Cristiano Curi Fernandes
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -564,8 +586,8 @@ By Cristiano Curi Fernandes
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

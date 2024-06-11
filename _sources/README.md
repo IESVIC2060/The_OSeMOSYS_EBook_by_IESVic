@@ -7,7 +7,7 @@ This book contains the basics of the project's development with detailed explana
 
 # Project Authors and Book Information:
 
-* Fernandes, Cristiano (EIT) - **Book author** (written as part of a co-op work term with IESVic)  
+* Fernandes, Cristiano (EIT) - **Book author** (written as part of a co-op work term with IESVic)
 * Majumdar, Chiradeep (P.Eng) - PhD Student
 * Monroe, Jacob - Team lead
 * Rowe, Andrew (P.Eng) - Research supervisor 

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4 Model Debugging &#8212; OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic</title>
   
@@ -15,58 +14,56 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=5eb1bb1e"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Book_Files/4_Model_Debugging';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5 Final Considerations and Laying the Way Forward" href="5_Final_Considerations.html" />
     <link rel="prev" title="3 The OSeMOSYS Model in Pyomo" href="3_The_OSeMOSYS_Model_in_Pyomo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -74,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,9 +137,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../README.html">
+  
   
   
   
@@ -140,12 +151,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="OSeMOSYS Energy Model for British Columbia - A Pythonic Implementation by IESVic - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -205,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -214,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -343,20 +365,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -413,20 +437,20 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="model-debugging">
-<h1>4 Model Debugging<a class="headerlink" href="#model-debugging" title="Permalink to this headline">#</a></h1>
+<h1>4 Model Debugging<a class="headerlink" href="#model-debugging" title="Link to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="motivation-how-to-debug-linear-programs">
-<h1>4.1 Motivation: how to debug linear programs<a class="headerlink" href="#motivation-how-to-debug-linear-programs" title="Permalink to this headline">#</a></h1>
+<h1>4.1 Motivation: how to debug linear programs<a class="headerlink" href="#motivation-how-to-debug-linear-programs" title="Link to this heading">#</a></h1>
 <p>When dealing with linear programs we will almost always be looking into optimization problems (maximization and minimization). Solutions to these types of problems will conventionally follow the <a class="reference external" href="https://mathworld.wolfram.com/SimplexMethod.html">simplex method</a>, first described by american mathematician George Dantzig in 1947, which consists of an algebraic procedure with underlying geometric concepts that describe and solve linear problems by simplifying them to their corner-point feasible soltions (CPF solutions). This problem description allow us to solve simple problems by hand and relies on sofisticated software packages, capable of applying the method to more complex scenarios (higher geometric dimensions)</p>
 <p>Beyound the simplex method which is the standard choice of commercial solvers, the software engineer needs different tools to help diagnose potential problems in the solution, or sources of infeasibility to the program. Linear programming theory hints to an useful tool that can be viewed as a verification method for the original problem solution, the <a class="reference external" href="https://mathworld.wolfram.com/DualityTheorem.html">dual problem</a>. “The constraint values of the primal problem are related to the variables of the dual problem. These variables are known as shadow prices” [1]. Furthermore, the strong duality theorem states that the value of the objective function is equal between the primal and the dual and can be used to get the shadow proces of constraints from the primal. The shadow price (or slack value) of a constraint is, according to the strong duality theorem, the variation to the objective function value when the right-hand side of that constraint is increased by the unit value [1].</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="tools-for-debugging">
-<h1>4.2 Tools for debugging<a class="headerlink" href="#tools-for-debugging" title="Permalink to this headline">#</a></h1>
+<h1>4.2 Tools for debugging<a class="headerlink" href="#tools-for-debugging" title="Link to this heading">#</a></h1>
 <section id="problem-lp-formulation">
-<h2>4.2.1 Problem LP formulation<a class="headerlink" href="#problem-lp-formulation" title="Permalink to this headline">#</a></h2>
+<h2>4.2.1 Problem LP formulation<a class="headerlink" href="#problem-lp-formulation" title="Link to this heading">#</a></h2>
 <p>Linear problem definitions are often written as an optimization problem of the form:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">minimize</span> <span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> 
 
@@ -476,11 +500,11 @@ document.write(`
 <p>The lines above will make use of the <code class="docutils literal notranslate"><span class="pre">os</span></code> Python library to write the LP formulation into the <code class="docutils literal notranslate"><span class="pre">pyomo_model.lp</span></code> file. First the empty file is created and assigned to the variable <code class="docutils literal notranslate"><span class="pre">filename</span></code>, then the model instance is written into the file by Pyomo using <code class="docutils literal notranslate"><span class="pre">instance.write()</span></code>.</p>
 </section>
 <section id="extracting-model-components">
-<h2>4.2.2 Extracting model components<a class="headerlink" href="#extracting-model-components" title="Permalink to this headline">#</a></h2>
+<h2>4.2.2 Extracting model components<a class="headerlink" href="#extracting-model-components" title="Link to this heading">#</a></h2>
 <p>In the last section we explored linear program formulations and how to create files that contain the algebraic description of linear problems. We have seen that these files can be given to linear solvers, such as GLPK and solved by these solvers in the same way as a Pyomo or a MathProg model file; further we have discussed how we can ask for this file from the solver either through the command line, or from the Python script using Pyomo in combination with Python libraries for operating system manipulation.</p>
 <p>We will now discuss and explore Pyomo functionalities that can help on the debugging process. Pyomo can be used to print other bits of model information into separate files and increase the number of available resources for debugging.</p>
 <section id="printing-the-model">
-<h3>4.2.2.1 Printing the model<a class="headerlink" href="#printing-the-model" title="Permalink to this headline">#</a></h3>
+<h3>4.2.2.1 Printing the model<a class="headerlink" href="#printing-the-model" title="Link to this heading">#</a></h3>
 <p>Pyomo provides us with utility functions to help us assess the state of our model. Some of these utilities can have the model output to the screen with variable, set and parameter values.</p>
 <p>In order to output the model information to the screen, or to a separate file, we can use one of the following approaches in code:</p>
 <ol class="arabic simple">
@@ -517,7 +541,7 @@ document.write(`
 </div>
 </section>
 <section id="printing-variable-values">
-<h3>4.2.2.2 Printing variable values<a class="headerlink" href="#printing-variable-values" title="Permalink to this headline">#</a></h3>
+<h3>4.2.2.2 Printing variable values<a class="headerlink" href="#printing-variable-values" title="Link to this heading">#</a></h3>
 <p>In the same way we can print a model summary using the <code class="docutils literal notranslate"><span class="pre">pprint()</span></code> and <code class="docutils literal notranslate"><span class="pre">display()</span></code> methods, we can extract variable values and additional information by employing the <code class="docutils literal notranslate"><span class="pre">pprint()</span></code> method. There are two main ways to extract information from variables and output them to the screen, or to a file:</p>
 <ol class="arabic simple">
 <li><p>Extracting from a single variable: <code class="docutils literal notranslate"><span class="pre">model.variavble_x.pprint()</span></code></p></li>
@@ -531,7 +555,7 @@ document.write(`
 <p>In the second example we see that we can output information from model components into separate files by assigning the file path to a python variable, <code class="docutils literal notranslate"><span class="pre">variable_log</span></code>, and put it inside the <code class="docutils literal notranslate"><span class="pre">print()</span></code> statement together with the <code class="docutils literal notranslate"><span class="pre">value</span></code> method from Pyomo.</p>
 </section>
 <section id="print-selected-results">
-<h3>4.2.2.3 Print selected results<a class="headerlink" href="#print-selected-results" title="Permalink to this headline">#</a></h3>
+<h3>4.2.2.3 Print selected results<a class="headerlink" href="#print-selected-results" title="Link to this heading">#</a></h3>
 <p>Another useful tool that has been developed for use in this project is the <strong>Selected Results</strong> file. This file contains some outputs from the model that can help us catch discrepancies between different implemntations of the same problem (like Pyomo versus MathProg, for example), or verify that the order of magnitude of the results is as expected. The access to such file can greatly decrease debugging time, allowing the programmer to rapidly identify the issue to be tackled.</p>
 <p>To create this file, simply select what results you would wish to see and have them be printed out to a separate file. Some functions and components of the model that you might wish to check are:</p>
 <ul class="simple">
@@ -544,10 +568,10 @@ document.write(`
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="taking-advantage-of-solver-information">
-<h1>4.3 Taking advantage of solver information<a class="headerlink" href="#taking-advantage-of-solver-information" title="Permalink to this headline">#</a></h1>
+<h1>4.3 Taking advantage of solver information<a class="headerlink" href="#taking-advantage-of-solver-information" title="Link to this heading">#</a></h1>
 <p>We have previously eluded to the possibility of utilizing solvers to extract additional information about the problem and the solution process, such as LP formulation, duals and slack values. In this section let us look into how we can use solvers and Pyomo to interact with solvers in order to obtain such information.</p>
 <section id="cplex-files">
-<h2>4.3.1 CPLEX files<a class="headerlink" href="#cplex-files" title="Permalink to this headline">#</a></h2>
+<h2>4.3.1 CPLEX files<a class="headerlink" href="#cplex-files" title="Link to this heading">#</a></h2>
 <p>The IBM CPLEX solver comes with its own <a class="reference external" href="https://www.ibm.com/products/ilog-cplex-optimization-studio">optimization studio</a> upon installation which allows the programmer to explore the optimization model using an intuitive GUI and obtain extra information about the problem’s solution. It is possible, however to access the same information by navigating CPLEX through the command line to create the relevant files we wish to study.</p>
 <p>To run CPLEX from your command line, simply navigate to your model’s folder on the command line and call CPLEX:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">my_model_path</span>
@@ -591,7 +615,7 @@ document.write(`
 <p>After getting the file type optins from CPLEX, simply select the option you want. The new file should be created in your working directory from the command line and it will comply with CPLEX’s syntax for that <a class="reference external" href="https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex-other-file-formats">file format</a>.</p>
 </section>
 <section id="pyomo-suffixes">
-<h2>4.3.2 Pyomo suffixes<a class="headerlink" href="#pyomo-suffixes" title="Permalink to this headline">#</a></h2>
+<h2>4.3.2 Pyomo suffixes<a class="headerlink" href="#pyomo-suffixes" title="Link to this heading">#</a></h2>
 <p>A suffix is solver functionality for declaring extra model data, typically in the form of solution information [4]. Pyomo allows the programmer to have access to this information through the <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> component class.</p>
 <p>As we have seen in chapter 2 of this tutorial series, Pyomo borrows many of its concepts and syntax from AMPL, suffixes are no different in this matter, as the functionality is adapted from AMPL’s implementation of it as well.</p>
 <p>In its essence, a suffix is allowing a two-way communication between the model and the solver as the model is being solved. This way, we are able to:</p>
@@ -648,7 +672,7 @@ document.write(`
 </div>
 </section>
 <section id="pyomo-slack-values">
-<h2>4.3.3 Pyomo slack values<a class="headerlink" href="#pyomo-slack-values" title="Permalink to this headline">#</a></h2>
+<h2>4.3.3 Pyomo slack values<a class="headerlink" href="#pyomo-slack-values" title="Link to this heading">#</a></h2>
 <p>As we have seen, it is possible to extract, amoung other things, information about the dual problem of the model using Pyomo suffixes. More than knowledge about duals, we might wish to know more about specific model components to help us debug the algorithm. A useful part of a model that can be used to debug the script and give the programmer further insight into the solution space of the program are the so called constraint <strong>shadow prices</strong>, or <strong>slack values</strong>.</p>
 <p>Luckly, Pyomo stores these slack values for every model constraint, after the model is constructed, inside the <code class="docutils literal notranslate"><span class="pre">component_objects()</span></code> method of the model instance. Using this method we can directly access the components of our model (Sets, Parameters, Variables, Constranits and Objective Function). In order to get the slack values from our model constraints, we will simply specify <code class="docutils literal notranslate"><span class="pre">Constraint</span></code> as our component of interest to the method and then iterate through each constraint to extract the value. This is illustrated by the following code excerpt:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">component_objects</span><span class="p">(</span><span class="n">Constraint</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -659,13 +683,13 @@ document.write(`
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="interpreting-model-duals-for-debugging">
-<h1>4.4 Interpreting model duals for debugging<a class="headerlink" href="#interpreting-model-duals-for-debugging" title="Permalink to this headline">#</a></h1>
+<h1>4.4 Interpreting model duals for debugging<a class="headerlink" href="#interpreting-model-duals-for-debugging" title="Link to this heading">#</a></h1>
 <p>We have seen how to extract information about model duals using a solver like CPLEX to generate a duals file for us. Now let us explore how to take advantage of these files to help us in debugging our models so we can achieve the result we expect and get a better insight into our linear program formulation.</p>
 <p>In the case of our project with OSeMOSYS, we had an original implementation in Mathprog that we wished to recreate using Pyomo, so we knew what the goal value for the model’s objective function was, effectively making the dual program files a short cut into understanding how the new Pyomo model was behaving.</p>
 <p>With access to the dual files it is possble to simply compare them and see if any values differ, if so, indicating an implementation problem occuring under that constraint, or variable. Differet values for the objective function indicate an evident implementation problem, but how different they are will indicate how loose, or how strict the solution space is. The dual files will then indicate, together with the slack values which constraints exactly are shifting the model’s solution space away fromthe expected objective value result.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="references">
-<h1>4.5 References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h1>
+<h1>4.5 References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
 <p>[1] <a class="reference external" href="http://ksuweb.kennesaw.edu/~jgarrido/CS4491_notes/Sensitivity_rep.pdf">J.M. Garrido; Sensitivity - CS4491 Introduction to Computational Models in Python; Kennesaw State University; 2015</a></p>
 <p>[2] <a class="reference external" href="https://archive.org/details/introductiontoop0000hill_g8z1">F.S. Hillier, G.J. Lieberman; Introduction to Operations Research; 9th ed.; Chapter 4: Solving Linear Programming Problems: The Simplex Method</a></p>
 <p>[3] <a class="reference external" href="https://pyomo.readthedocs.io/en/stable/working_models.html">Working with Pyomo Models</a></p>
@@ -699,11 +723,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="3_The_OSeMOSYS_Model_in_Pyomo.html"
@@ -723,10 +746,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -734,6 +754,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -783,9 +804,10 @@ By Cristiano Curi Fernandes
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -809,8 +831,8 @@ By Cristiano Curi Fernandes
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>
